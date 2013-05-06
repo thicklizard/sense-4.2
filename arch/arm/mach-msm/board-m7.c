@@ -127,7 +127,7 @@
 #include <linux/htc_cir.h>
 #endif
 
-#define MSM_PMEM_ADSP_SIZE         0x8600000
+#define MSM_PMEM_ADSP_SIZE         0xC900000
 #define MSM_PMEM_AUDIO_SIZE        0x4CF000
 #ifdef CONFIG_FB_MSM_HDMI_AS_PRIMARY
 #define MSM_PMEM_SIZE 0x8200000 
