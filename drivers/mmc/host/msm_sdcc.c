@@ -299,9 +299,15 @@ static int msmsdcc_vreg_reset(struct msmsdcc_host *host);
 static int msmsdcc_runtime_resume(struct device *dev);
 static int msmsdcc_execute_tuning(struct mmc_host *mmc, u32 opcode);
 static bool msmsdcc_is_wait_for_auto_prog_done(struct msmsdcc_host *host,
+<<<<<<< HEAD
 					       struct mmc_request *mrq);
 static bool msmsdcc_is_wait_for_prog_done(struct msmsdcc_host *host,
 					  struct mmc_request *mrq);
+=======
+						struct mmc_request *mrq);
+static bool msmsdcc_is_wait_for_prog_done(struct msmsdcc_host *host,
+						struct mmc_request *mrq);
+>>>>>>> 39e6446... patch with internationalsourcedrop
 
 static inline unsigned short msmsdcc_get_nr_sg(struct msmsdcc_host *host)
 {
@@ -415,11 +421,14 @@ static int msmsdcc_bam_dml_reset_and_restore(struct msmsdcc_host *host)
 		goto out;
 	}
 
+<<<<<<< HEAD
 	memset(host->sps.prod.config.desc.base, 0x00,
 			host->sps.prod.config.desc.size);
 	memset(host->sps.cons.config.desc.base, 0x00,
 			host->sps.cons.config.desc.size);
 
+=======
+>>>>>>> 39e6446... patch with internationalsourcedrop
 	
 	rc = msmsdcc_sps_restore_ep(host, &host->sps.prod);
 	if (rc) {
@@ -512,6 +521,7 @@ static void msmsdcc_hard_reset(struct msmsdcc_host *host)
 static void msmsdcc_reset_and_restore(struct msmsdcc_host *host)
 {
 	if (is_soft_reset(host)) {
+<<<<<<< HEAD
 		if (is_mmc_platform(host->plat)) {
 			if (is_sps_mode(host))
 			    host->sps.reset_bam = true;
@@ -545,6 +555,44 @@ static void msmsdcc_reset_and_restore(struct msmsdcc_host *host)
 			msmsdcc_soft_reset(host);
 			pr_info("%s: Applied soft reset to Controller\n",
 					mmc_hostname(host->mmc));
+=======
+		if (is_soft_reset(host)) {
+		if (is_mmc_platform(host->plat)) {
+			if (is_sps_mode(host))
+				host->sps.reset_bam = true;
+
+			msmsdcc_soft_reset(host);
+
+			pr_info("%s: Applied soft reset to Controller\n",
+					mmc_hostname(host->mmc));
+			if (host->mmc->card && mmc_card_mmc(host->mmc->card)) {
+				pr_info("%s: cid %08x%08x%08x%08x (%s)\n",
+					mmc_hostname(host->mmc->card->host),
+					host->mmc->card->raw_cid[0], host->mmc->card->raw_cid[1],
+					host->mmc->card->raw_cid[2], host->mmc->card->raw_cid[3], host->mmc->card->cid.prod_name);
+				pr_info("%s: csd %08x%08x%08x%08x\n",
+					mmc_hostname(host->mmc->card->host),
+					host->mmc->card->raw_csd[0], host->mmc->card->raw_csd[1],
+					host->mmc->card->raw_csd[2], host->mmc->card->raw_csd[3]);
+				if (host->mmc->card->ext_csd.fwrev)
+					pr_info("%s: fw_ver %s\n",
+						mmc_hostname(host->mmc->card->host),
+						host->mmc->card->ext_csd.fwrev);
+			}
+		} else {
+			if (is_sps_mode(host)) {
+				
+				msmsdcc_dml_reset(host);
+				host->sps.pipe_reset_pending = true;
+			}
+			mb();
+
+			msmsdcc_soft_reset(host);
+
+			pr_info("%s: Applied soft reset to Controller\n",
+					mmc_hostname(host->mmc));
+
+>>>>>>> 39e6446... patch with internationalsourcedrop
 			if (is_sps_mode(host))
 				msmsdcc_dml_init(host);
 		}
@@ -644,7 +692,10 @@ msmsdcc_request_end(struct msmsdcc_host *host, struct mmc_request *mrq)
 		mdelay(5);
 
 	msmsdcc_reset_dpsm(host);
+<<<<<<< HEAD
 
+=======
+>>>>>>> 39e6446... patch with internationalsourcedrop
 	
 	memset(&host->curr, 0, sizeof(struct msmsdcc_curr_req));
 
@@ -912,7 +963,11 @@ static void msmsdcc_sps_complete_tlet(unsigned long data)
 		if (!mrq->data->stop || mrq->cmd->error ||
 			(mrq->sbc && !mrq->data->error)) {
 			mrq->data->bytes_xfered = host->curr.data_xfered;
+<<<<<<< HEAD
 			msmsdcc_reset_dpsm(host);
+=======
+			msmsdcc_reset_dpsm(host); 
+>>>>>>> 39e6446... patch with internationalsourcedrop
 			del_timer(&host->req_tout_timer);
 			memset(&host->curr, 0, sizeof(struct msmsdcc_curr_req));
 			spin_unlock_irqrestore(&host->lock, flags);
@@ -2139,6 +2194,10 @@ msmsdcc_request(struct mmc_host *mmc, struct mmc_request *mrq)
 	if (host->plat->is_sdio_al_client)
 		msmsdcc_sdio_al_lpm(mmc, false);
 
+<<<<<<< HEAD
+=======
+	
+>>>>>>> 39e6446... patch with internationalsourcedrop
 	if (is_mmc_platform(host->plat)) {
 		
 		if (is_sps_mode(host) && host->sps.reset_bam) {
@@ -2146,7 +2205,11 @@ msmsdcc_request(struct mmc_host *mmc, struct mmc_request *mrq)
 				if (!msmsdcc_bam_dml_reset_and_restore(host))
 					break;
 				pr_err("%s: msmsdcc_bam_dml_reset_and_restore returned error. %d attempts left.\n",
+<<<<<<< HEAD
 					mmc_hostname(host->mmc), --retries);
+=======
+						mmc_hostname(host->mmc), --retries);
+>>>>>>> 39e6446... patch with internationalsourcedrop
 			}
 		}
 	} else {
@@ -2220,9 +2283,15 @@ msmsdcc_request(struct mmc_host *mmc, struct mmc_request *mrq)
 		spin_lock_irqsave(&host->lock, flags);
 	}
 
+<<<<<<< HEAD
 	if (!host->pwr || !atomic_read(&host->clks_on) ||
 			host->sdcc_irq_disabled ||
 			host->sps.reset_bam) {
+=======
+	if (!host->pwr || !atomic_read(&host->clks_on)
+			|| host->sdcc_irq_disabled
+      			|| host->sps.reset_bam) { 
+>>>>>>> 39e6446... patch with internationalsourcedrop
 		WARN(1, "%s: %s: SDCC is in bad state. don't process"
 		     " new request (CMD%d)\n", mmc_hostname(host->mmc),
 		     __func__, mrq->cmd->opcode);
@@ -4634,7 +4703,10 @@ msmsdcc_sps_bam_global_irq_cb(enum sps_callback_case sps_cb_case, void *user)
 	BUG_ON(!is_sps_mode(host));
 
 	if (sps_cb_case == SPS_CALLBACK_BAM_ERROR_IRQ) {
+<<<<<<< HEAD
 		
+=======
+>>>>>>> 39e6446... patch with internationalsourcedrop
 		if (is_mmc_platform(host->plat))
 			host->sps.reset_bam = true;
 		else {
@@ -5021,7 +5093,11 @@ static void msmsdcc_req_tout_timer_hdlr(unsigned long data)
 
 	spin_lock_irqsave(&host->lock, flags);
 	if (host->dummy_52_sent) {
+<<<<<<< HEAD
 		printk("%s: %s: dummy CMD52 timeout\n",
+=======
+		printk("%s: %s: dummy CMD52 timeout\n", 
+>>>>>>> 39e6446... patch with internationalsourcedrop
 				mmc_hostname(host->mmc), __func__);
 		host->dummy_52_sent = 0;
 	}
@@ -5616,8 +5692,11 @@ msmsdcc_probe(struct platform_device *pdev)
 	if (is_mmc_platform(host->plat)) {
 		version = readl_relaxed(host->base + MCI_VERSION);
 		if (version == 0x06000018) {
+<<<<<<< HEAD
 			
 			host->hw_caps &= ~MSMSDCC_SOFT_RESET;
+=======
+>>>>>>> 39e6446... patch with internationalsourcedrop
 			pr_info("%s: hard_reset\n", mmc_hostname(host->mmc));
 			msmsdcc_hard_reset(host);
 			if (is_sps_mode(host))

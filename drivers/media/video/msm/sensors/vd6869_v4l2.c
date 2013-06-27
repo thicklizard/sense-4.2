@@ -5372,7 +5372,11 @@ int vd6869_read_fuseid_sharp(struct sensor_cfg_data *cdata,
 		cdata->af_value.AF_INF_LSB = OTP[3];
 		cdata->af_value.AF_MACRO_MSB = OTP[4];
 		cdata->af_value.AF_MACRO_LSB = OTP[5];
+<<<<<<< HEAD
 		cdata->af_value.ACT_ID = OTP[12];
+=======
+		cdata->af_value.ACT_ID = OTP[12]; 
+>>>>>>> 39e6446... patch with internationalsourcedrop
 		pr_info("VCM_START_MSB =0x%x\n", cdata->af_value.VCM_START_MSB);
 		pr_info("VCM_START_LSB =0x%x\n", cdata->af_value.VCM_START_LSB);
 		pr_info("AF_INF_MSB =0x%x\n", cdata->af_value.AF_INF_MSB);
@@ -5380,6 +5384,10 @@ int vd6869_read_fuseid_sharp(struct sensor_cfg_data *cdata,
 		pr_info("AF_MACRO_MSB =0x%x\n", cdata->af_value.AF_MACRO_MSB);
 		pr_info("AF_MACRO_LSB =0x%x\n", cdata->af_value.AF_MACRO_LSB);
 		pr_info("ACT_ID =0x%x\n", cdata->af_value.ACT_ID);
+<<<<<<< HEAD
+=======
+		first = false;
+>>>>>>> 39e6446... patch with internationalsourcedrop
 	} else {
 		cdata->af_value.VCM_START_MSB = OTP[0];
 		cdata->af_value.VCM_START_LSB = OTP[1];
@@ -5387,7 +5395,11 @@ int vd6869_read_fuseid_sharp(struct sensor_cfg_data *cdata,
 		cdata->af_value.AF_INF_LSB = OTP[3];
 		cdata->af_value.AF_MACRO_MSB = OTP[4];
 		cdata->af_value.AF_MACRO_LSB = OTP[5];
+<<<<<<< HEAD
 		cdata->af_value.ACT_ID = OTP[12];
+=======
+		cdata->af_value.ACT_ID = OTP[12]; 
+>>>>>>> 39e6446... patch with internationalsourcedrop
 
 		cdata->sensor_ver = OTP[10];
 

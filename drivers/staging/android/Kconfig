@@ -46,7 +46,11 @@ config DEBUG_BLDR_LOG
 config DEBUG_LAST_BLDR_LOG
         bool "Dump Bootloader log"
         depends on ANDROID_RAM_CONSOLE
+<<<<<<< HEAD
         default n
+=======
+        default n 
+>>>>>>> 39e6446... patch with internationalsourcedrop
 
 config PERSISTENT_TRACER
 	bool "Persistent function tracer"
