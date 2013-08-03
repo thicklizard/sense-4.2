@@ -1308,7 +1308,6 @@ typedef struct{
 	uint8_t AF_MACRO_MSB;
 	uint8_t AF_MACRO_LSB;
 <<<<<<< HEAD
-<<<<<<< HEAD
 	
 	uint8_t VCM_BIAS;
 	uint8_t VCM_OFFSET;
@@ -1322,8 +1321,6 @@ typedef struct{
 =======
 >>>>>>> 39e6446... patch with internationalsourcedrop
 	uint8_t ACT_ID;
-=======
->>>>>>> 1106d32... clean up patch with internationalsourcedrop
 }af_value_t;
 
 struct sensor_cfg_data {
@@ -1583,7 +1580,6 @@ struct msm_actuator_af_OTP_info_t {
 	uint16_t VCM_Infinity;
 	uint16_t VCM_Macro;
 <<<<<<< HEAD
-<<<<<<< HEAD
 	
 	uint8_t VCM_Bias;
 	uint8_t VCM_Offset;
@@ -1595,8 +1591,6 @@ struct msm_actuator_af_OTP_info_t {
 =======
 >>>>>>> 39e6446... patch with internationalsourcedrop
 	uint8_t act_id;
-=======
->>>>>>> 1106d32... clean up patch with internationalsourcedrop
 };
 
 enum af_camera_name {

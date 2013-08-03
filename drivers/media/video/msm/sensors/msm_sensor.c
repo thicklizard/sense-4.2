@@ -693,7 +693,6 @@ int32_t msm_sensor_setting_parallel(struct msm_sensor_ctrl_t *s_ctrl,
 <<<<<<< HEAD
 =======
 
-<<<<<<< HEAD
 #ifdef CONFIG_RAWCHIPII
 	    if(YushanII_Get_reloadInfo() == 0){
 	      pr_info("stop YushanII first");
@@ -702,8 +701,6 @@ int32_t msm_sensor_setting_parallel(struct msm_sensor_ctrl_t *s_ctrl,
 #endif
 
 >>>>>>> 39e6446... patch with internationalsourcedrop
-=======
->>>>>>> 1106d32... clean up patch with internationalsourcedrop
 		v4l2_subdev_notify(&s_ctrl->sensor_v4l2_subdev,
 			NOTIFY_ISPIF_STREAM, (void *)ISPIF_STREAM(
 			PIX_0, ISPIF_OFF_IMMEDIATELY));

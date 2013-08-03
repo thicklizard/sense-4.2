@@ -522,7 +522,6 @@ static void msmsdcc_reset_and_restore(struct msmsdcc_host *host)
 {
 	if (is_soft_reset(host)) {
 <<<<<<< HEAD
-<<<<<<< HEAD
 		if (is_mmc_platform(host->plat)) {
 			if (is_sps_mode(host))
 			    host->sps.reset_bam = true;
@@ -558,8 +557,6 @@ static void msmsdcc_reset_and_restore(struct msmsdcc_host *host)
 					mmc_hostname(host->mmc));
 =======
 		if (is_soft_reset(host)) {
-=======
->>>>>>> 1106d32... clean up patch with internationalsourcedrop
 		if (is_mmc_platform(host->plat)) {
 			if (is_sps_mode(host))
 				host->sps.reset_bam = true;
