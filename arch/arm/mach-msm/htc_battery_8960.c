@@ -2215,10 +2215,6 @@ static int __init htc_battery_init(void)
 	mutex_init(&batt_set_alarm_lock);
 #endif
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 39e6446... patch with internationalsourcedrop
 	
 	htc_batt_info.rep.batt_vol = 3700;
 	htc_batt_info.rep.batt_id = 1;
@@ -2242,13 +2238,9 @@ static int __init htc_battery_init(void)
 	alarm_data.upper_threshold = 4400;
 #endif
 
-<<<<<<< HEAD
 	
 
 	platform_driver_register(&htc_battery_driver);
-=======
-	platform_driver_register(&htc_battery_driver); 
->>>>>>> 39e6446... patch with internationalsourcedrop
 
 	return 0;
 }

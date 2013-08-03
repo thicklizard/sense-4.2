@@ -1307,7 +1307,6 @@ typedef struct{
 	uint8_t AF_INF_LSB;
 	uint8_t AF_MACRO_MSB;
 	uint8_t AF_MACRO_LSB;
-<<<<<<< HEAD
 	
 	uint8_t VCM_BIAS;
 	uint8_t VCM_OFFSET;
@@ -1318,8 +1317,6 @@ typedef struct{
 	uint8_t VCM_VENDOR_ID_VERSION;
 	
 	uint8_t VCM_VENDOR;
-=======
->>>>>>> 39e6446... patch with internationalsourcedrop
 	uint8_t ACT_ID;
 }af_value_t;
 
@@ -1579,7 +1576,6 @@ struct msm_actuator_af_OTP_info_t {
 	uint16_t VCM_Start;
 	uint16_t VCM_Infinity;
 	uint16_t VCM_Macro;
-<<<<<<< HEAD
 	
 	uint8_t VCM_Bias;
 	uint8_t VCM_Offset;
@@ -1588,8 +1584,6 @@ struct msm_actuator_af_OTP_info_t {
 	uint8_t VCM_Vendor_Id_Version;
 	
 	uint8_t VCM_Vendor;
-=======
->>>>>>> 39e6446... patch with internationalsourcedrop
 	uint8_t act_id;
 };
 

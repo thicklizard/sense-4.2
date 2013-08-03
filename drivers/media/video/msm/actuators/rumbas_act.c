@@ -1295,7 +1295,6 @@ static int32_t rumbas_act_init_focus(struct msm_actuator_ctrl_t *a_ctrl)
 
 	
 	if (rumbas_act_t.ois_ready_version) {
-<<<<<<< HEAD
 		if (a_ctrl->af_OTP_info.act_id == 0x11 || a_ctrl->af_OTP_info.act_id == 0x31) { 
 			memset(byte_data, 0, sizeof(byte_data));
 			load_cmd_prevalue(0x39, &byte_data[0]);
@@ -1314,25 +1313,6 @@ static int32_t rumbas_act_init_focus(struct msm_actuator_ctrl_t *a_ctrl)
 			((int16_t *)byte_data)[0] = ENDIAN(8);
 		else 
 			((int16_t *)byte_data)[0] = ENDIAN(-10);
-=======
-			if (a_ctrl->af_OTP_info.act_id == 0x11 || a_ctrl->af_OTP_info.act_id == 0x31) {
-				memset(byte_data, 0, sizeof(byte_data));
-				load_cmd_prevalue(0x39, &byte_data[0]);
-				((uint16_t *)byte_data)[0] = ENDIAN(19);
-				((uint16_t *)byte_data)[1] = ENDIAN(150);
-				((uint16_t *)byte_data)[2] = ENDIAN(100);
-				rc = msm_camera_i2c_write_seq(&(rumbas_act_t.i2c_client), 0x39, &byte_data[0], 8);
-				if (rc < 0) {
-					pr_err("[OIS] %s 0x39 cmd i2c write failed (%d)\n", __func__, rc);
-			}
-		}
-		memset(byte_data, 0, sizeof(byte_data));
-		load_cmd_prevalue(0x27, &byte_data[0]);
-			if (a_ctrl->af_OTP_info.act_id == 0x11 || a_ctrl->af_OTP_info.act_id == 0x31)
-				((int16_t *)byte_data)[0] = ENDIAN(8);
-			else
-				((int16_t *)byte_data)[0] = ENDIAN(-10);
->>>>>>> 39e6446... patch with internationalsourcedrop
 		rc = msm_camera_i2c_write_seq(&(rumbas_act_t.i2c_client),
 			0x27, &byte_data[0], 8);
 		if (rc < 0) {
@@ -1441,21 +1421,13 @@ int32_t rumbas_act_set_af_value(struct msm_actuator_ctrl_t *a_ctrl, af_value_t a
 		}
 		a_ctrl->af_OTP_info.VCM_Macro = (OTP_data[4]<<8 | OTP_data[5]);
 	}
-<<<<<<< HEAD
 	a_ctrl->af_OTP_info.act_id = af_value.ACT_ID;
-=======
-	a_ctrl->af_OTP_info.act_id = af_value.ACT_ID; 
->>>>>>> 39e6446... patch with internationalsourcedrop
 	pr_info("OTP_data[2] %d OTP_data[3] %d OTP_data[4] %d OTP_data[5] %d\n",
 		OTP_data[2], OTP_data[3], OTP_data[4], OTP_data[5]);
 	pr_info("VCM_Start = %d\n", a_ctrl->af_OTP_info.VCM_Start);
 	pr_info("VCM_Infinity = %d\n", a_ctrl->af_OTP_info.VCM_Infinity);
 	pr_info("VCM_Macro = %d\n", a_ctrl->af_OTP_info.VCM_Macro);
-<<<<<<< HEAD
 	pr_info("ACT_ID = 0x%x\n", a_ctrl->af_OTP_info.act_id);
-=======
-	pr_info("ACT_ID = 0x%x\n", a_ctrl->af_OTP_info.act_id); 
->>>>>>> 39e6446... patch with internationalsourcedrop
 	return rc;
 }
 

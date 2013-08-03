@@ -63,9 +63,6 @@ struct yushanII_int_t {
 
 static struct YushanII_ctrl *YushanIICtrl = NULL;
 
-int YushanII_Get_reloadInfo(void){
-  	return reload_firmware;
-} 
 
 void YushanII_reload_firmware(void){
 	reload_firmware = 1;
@@ -533,14 +530,11 @@ void YushanII_init_backcam(struct msm_sensor_ctrl_t *sensor,int res){
 		
 		Ilp0100_interruptEnable(ENABLE_HTC_INTR, INTR_PIN_0);
 		Ilp0100_interruptEnable(ENABLE_RECOMMENDED_DEBUG_INTR_PIN1, INTR_PIN_1);
-<<<<<<< HEAD
 		Ilp0100_stop();
 		if (sensor->yushanII_switch_virtual_channel) {
 		    Ilp0100_setVirtualChannelShortOrNormal(1);
 		    Ilp0100_setVirtualChannelLong(0);
 		}
-=======
->>>>>>> 39e6446... patch with internationalsourcedrop
 		pr_info("[CAM]%s, YushanII HDR mode", __func__);
 		Ilp0100_defineMode(output_format);
 		YushanII_default_exp();
@@ -552,16 +546,12 @@ void YushanII_init_backcam(struct msm_sensor_ctrl_t *sensor,int res){
 	}else{
 		
 		Ilp0100_interruptEnable(ENABLE_NO_INTR, INTR_PIN_0);
-<<<<<<< HEAD
 		Ilp0100_interruptEnable(ENABLE_RECOMMENDED_DEBUG_INTR_PIN1, INTR_PIN_1);
 		Ilp0100_stop();
 		if (sensor->yushanII_switch_virtual_channel) {
 	        Ilp0100_setVirtualChannelShortOrNormal(0);
 	        Ilp0100_setVirtualChannelLong(1);
 	    }
-=======
-		Ilp0100_interruptEnable(ENABLE_NO_INTR, INTR_PIN_1);
->>>>>>> 39e6446... patch with internationalsourcedrop
 		pr_info(" [CAM]%s, YushanII NON HDR mode", __func__);
 		Ilp0100_defineMode(output_format);
 		#ifdef HDR_COLOR_BAR
@@ -616,11 +606,7 @@ void YushanII_init_frontcam(struct msm_sensor_ctrl_t *sensor,int res){
 		sensor->sensordata->camera_type,
 		first_init_2nd_cam);
 
-<<<<<<< HEAD
 	if (first_init_2nd_cam) {
-=======
-	if (first_init_2nd_cam) {		
->>>>>>> 39e6446... patch with internationalsourcedrop
 		Ilp0100_defineMode(output_format);
 		#ifdef HDR_COLOR_BAR
 		Ilp0100_startTestMode(BYPASS_NO_BYPASS, TEST_COLORBAR);
@@ -1349,10 +1335,7 @@ void YushanII_set_tm_LongOnlyGain(void){
 
 }
 
-<<<<<<< HEAD
 
-=======
->>>>>>> 39e6446... patch with internationalsourcedrop
 int YushanII_set_hdr_factor(void __user *argp){
        uint8_t usr_HDRFactor;
 
@@ -1373,17 +1356,10 @@ int YushanII_set_hdr_factor(void __user *argp){
 		}
 	pr_info("%s usr_HDRFactor:%d",__func__,usr_HDRFactor);
 
-<<<<<<< HEAD
 	if(usr_HDRFactor > 1)
 		YushanII_set_tm_MergeGain();
 	else 
 		YushanII_set_tm_LongOnlyGain();
-=======
-	  if(usr_HDRFactor > 1)
-	    	YushanII_set_tm_MergeGain();
-	  else 
-	    	YushanII_set_tm_LongOnlyGain();
->>>>>>> 39e6446... patch with internationalsourcedrop
 
        Ilp0100_setHDRFactor(usr_HDRFactor);
        return 0;

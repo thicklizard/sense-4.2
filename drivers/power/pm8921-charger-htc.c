@@ -867,11 +867,8 @@ static int pm_chg_vbatdet_set(struct pm8921_chg_chip *chip, int voltage)
 	return pm_chg_masked_write(chip, CHG_VBAT_DET, PM8921_CHG_V_MASK, temp);
 }
 
-<<<<<<< HEAD
 
 
-=======
->>>>>>> 39e6446... patch with internationalsourcedrop
 static int set_appropriate_vbatdet(struct pm8921_chg_chip *chip)
 {
 	int rc = 0;
@@ -881,26 +878,17 @@ static int set_appropriate_vbatdet(struct pm8921_chg_chip *chip)
 		vbat = chip->cool_bat_voltage - chip->resume_voltage_delta;
 	else if (chip->is_bat_warm)
 		vbat = chip->warm_bat_voltage - chip->resume_voltage_delta;
-<<<<<<< HEAD
 	else if (is_batt_full_eoc_stop)
 		vbat = chip->max_voltage_mv- chip->resume_voltage_delta;
 	else 
 		vbat = PM8921_CHG_VBATDET_MAX;
-=======
-	else
-		vbat = chip->max_voltage_mv- chip->resume_voltage_delta;
->>>>>>> 39e6446... patch with internationalsourcedrop
 
 	rc = pm_chg_vbatdet_set(chip, vbat);
 
 	if (rc)
 		pr_err("Failed to set vbatdet=%d rc=%d\n", vbat, rc);
 	else
-<<<<<<< HEAD
 		pr_info("%s, vbatdet=%d, is_bat_cool=%d, is_bat_warm=%d\n", __func__, vbat, chip->is_bat_cool, chip->is_bat_warm);
-=======
-		pr_info("%s, vbat=%d, is_bat_cool=%d, is_bat_warm=%d\n", __func__, vbat, chip->is_bat_cool, chip->is_bat_warm);
->>>>>>> 39e6446... patch with internationalsourcedrop
 
 	return rc;
 }
@@ -4745,11 +4733,6 @@ static void eoc_worker(struct work_struct *work)
 	if (EOC_STOP_CHG_COUNT == eoc_count) {
 		eoc_count = 0;
 		is_ac_safety_timeout_twice = false;
-<<<<<<< HEAD
-=======
-		set_appropriate_vbatdet(chip);
-		pm_chg_disable_auto_enable(chip, 1, BATT_CHG_DISABLED_BIT_EOC);
->>>>>>> 39e6446... patch with internationalsourcedrop
 
 		if (is_ext_charging(chip))
 			chip->ext_charge_done = true;
@@ -4885,11 +4868,7 @@ static void battery_cool(bool enter)
 	static int prev_is_cold;
 	int is_cold = pm_chg_get_rt_status(the_chip, BATTTEMP_COLD_IRQ);
 
-<<<<<<< HEAD
 	pr_info("%s:enter=%d, is_cold=%d\n", __func__, enter, is_cold);
-=======
-  	pr_info("%s:enter=%d, is_cold=%d\n", __func__, enter, is_cold);
->>>>>>> 39e6446... patch with internationalsourcedrop
 
 	if (enter == the_chip->is_bat_cool)
 		return;
@@ -4905,20 +4884,11 @@ static void battery_cool(bool enter)
 		pm_chg_vddmax_set(the_chip, the_chip->max_voltage_mv);
 	}
 
-<<<<<<< HEAD
 	set_appropriate_vbatdet(the_chip);
 
 	if(is_cold != prev_is_cold)
 	{
 		htc_gauge_event_notify(HTC_GAUGE_EVENT_TEMP_ZONE_CHANGE);
-=======
-	
-	set_appropriate_vbatdet(the_chip);
-
-  	if(is_cold != prev_is_cold)
-	{
-	htc_gauge_event_notify(HTC_GAUGE_EVENT_TEMP_ZONE_CHANGE);
->>>>>>> 39e6446... patch with internationalsourcedrop
 
 		
 		if(the_chip->ext_usb)
@@ -4951,13 +4921,8 @@ static void battery_warm(bool enter)
 		htc_gauge_event_notify(HTC_GAUGE_EVENT_TEMP_ZONE_CHANGE);
 	}
 
-<<<<<<< HEAD
 	set_appropriate_vbatdet(the_chip);
 	
-=======
-	set_appropriate_vbatdet(the_chip);	
-
->>>>>>> 39e6446... patch with internationalsourcedrop
 	if(the_chip->ext_usb)
 	{
 		queue_delayed_work(ext_charger_wq, &ext_usb_temp_task, HZ/200);

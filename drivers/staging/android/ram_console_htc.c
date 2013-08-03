@@ -510,33 +510,15 @@ static ssize_t ram_console_read_old(struct file *file, char __user *buf,
 	static char *bldr_ptr;
 	static unsigned long bldr_size;
 
-<<<<<<< HEAD
 	last_bldr_ptr=last_bldr_log_buf;
 	last_bldr_size=last_bldr_log_buf_size;
 	bldr_ptr=bldr_log_buf;
 	bldr_size=bldr_log_buf_size;
-=======
-	if(!get_tamper_sf())
-	{
-		last_bldr_ptr=last_bldr_log;
-		last_bldr_size=last_bldr_log_size;
-		bldr_ptr=bldr_log;
-		bldr_size=bldr_log_size;
-	}
-	else
-	{
-		last_bldr_ptr=last_bldr_log_buf;
-		last_bldr_size=last_bldr_log_buf_size;
-		bldr_ptr=bldr_log_buf;
-		bldr_size=bldr_log_buf_size;
-	}
->>>>>>> 39e6446... patch with internationalsourcedrop
 
 	if (pos >= last_bldr_size + ram_console_old_log_size + bldr_size)
 		return 0;
 
 	if (pos >= last_bldr_size + ram_console_old_log_size) {
-<<<<<<< HEAD
 
 		bootloader_pos = pos - (last_bldr_size + ram_console_old_log_size);
 		count = min(len, (size_t)(bldr_size - bootloader_pos));
@@ -551,19 +533,12 @@ static ssize_t ram_console_read_old(struct file *file, char __user *buf,
 		ram_console_pos = pos - last_bldr_size;
 		count = min(len, (size_t)(ram_console_old_log_size - ram_console_pos));
 		if (copy_to_user(buf, ram_console_old_log + ram_console_pos, count))
-=======
-
-		bootloader_pos = pos - (last_bldr_size + ram_console_old_log_size);
-		count = min(len, (size_t)(bldr_size - bootloader_pos));
-		if (copy_to_user(buf, bldr_ptr + bootloader_pos, count))
->>>>>>> 39e6446... patch with internationalsourcedrop
 			return -EFAULT;
 
 		*offset += count;
 		return count;
 	}
 
-<<<<<<< HEAD
 	count = min(len, (size_t)(last_bldr_size - pos));
 	if (copy_to_user(buf, last_bldr_ptr + pos, count))
 		return -EFAULT;
@@ -581,8 +556,6 @@ static ssize_t ram_console_read_old(struct file *file, char __user *buf,
 	if (pos >= last_bldr_size + ram_console_old_log_size)
 		return 0;
 
-=======
->>>>>>> 39e6446... patch with internationalsourcedrop
 	if (pos >= last_bldr_size) {
 		ram_console_pos = pos - last_bldr_size;
 		count = min(len, (size_t)(ram_console_old_log_size - ram_console_pos));
@@ -599,64 +572,13 @@ static ssize_t ram_console_read_old(struct file *file, char __user *buf,
 
 	*offset += count;
 	return count;
-<<<<<<< HEAD
-=======
-#elif defined(CONFIG_DEBUG_LAST_BLDR_LOG)
-	loff_t ram_console_pos;
-	static char *last_bldr_ptr;
-	static unsigned long last_bldr_size;
-
-	if(!get_tamper_sf())
-	{
-		last_bldr_ptr=last_bldr_log;
-		last_bldr_size=last_bldr_log_size;
-	}
-	else
-	{
-		last_bldr_ptr=last_bldr_log_buf;
-		last_bldr_size=last_bldr_log_buf_size;
-	}
-
-	if (pos >= last_bldr_size + ram_console_old_log_size)
-		return 0;
-
-	if (pos >= last_bldr_size) {
-		ram_console_pos = pos - last_bldr_size;
-		count = min(len, (size_t)(ram_console_old_log_size - ram_console_pos));
-		if (copy_to_user(buf, ram_console_old_log + ram_console_pos, count))
-			return -EFAULT;
-
-		*offset += count;
-		return count;
-	}
-
-	count = min(len, (size_t)(last_bldr_size - pos));
-	if (copy_to_user(buf, last_bldr_ptr + pos, count))
-		return -EFAULT;
-
-	*offset += count;
-	return count;
->>>>>>> 39e6446... patch with internationalsourcedrop
 #elif defined(CONFIG_DEBUG_BLDR_LOG)
 	loff_t bootloader_pos;
 	static char *bldr_ptr;
 	static unsigned long bldr_size;
 
-<<<<<<< HEAD
 	bldr_ptr=bldr_log_buf;
 	bldr_size=bldr_log_buf_size;
-=======
-	if(!get_tamper_sf())
-	{
-		bldr_ptr=bldr_log;
-		bldr_size=bldr_log_size;
-	}
-	else
-	{
-		bldr_ptr=bldr_log_buf;
-		bldr_size=bldr_log_buf_size;
-	}
->>>>>>> 39e6446... patch with internationalsourcedrop
 
 	if (pos >= ram_console_old_log_size + bldr_size)
 		return 0;
@@ -696,7 +618,6 @@ static const struct file_operations ram_console_file_ops = {
 	.read = ram_console_read_old,
 };
 
-<<<<<<< HEAD
 #if defined(CONFIG_DEBUG_LAST_BLDR_LOG) || defined(CONFIG_DEBUG_BLDR_LOG)
 bool bldr_rst_msg_parser(char *bldr_log_buf, unsigned long bldr_log_buf_size, bool is_last_bldr)
 {
@@ -770,8 +691,6 @@ bool bldr_rst_msg_parser(char *bldr_log_buf, unsigned long bldr_log_buf_size, bo
 		return found_ramdump_pattern_rst;
 }
 
-=======
->>>>>>> 39e6446... patch with internationalsourcedrop
 void bldr_log_parser(char *bldr_log, char *bldr_log_buf, unsigned long bldr_log_size, unsigned long *bldr_log_buf_size)
 {
 	int i,j,k;
@@ -823,15 +742,12 @@ void bldr_log_parser(char *bldr_log, char *bldr_log_buf, unsigned long bldr_log_
 				memcpy(bldr_log_buf_ptr, terminal_pattern, terminal_pattern_len);
 				bldr_log_buf_ptr +=terminal_pattern_len;
 			}
-<<<<<<< HEAD
 			else
 			{
 				
 				memcpy(bldr_log_buf_ptr, bldr_log_ptr, line_length);
 				bldr_log_buf_ptr +=line_length;
 			}
-=======
->>>>>>> 39e6446... patch with internationalsourcedrop
 
 			bldr_log_ptr+=line_length;
 			last_index=i+terminal_pattern_len;
@@ -841,10 +757,7 @@ void bldr_log_parser(char *bldr_log, char *bldr_log_buf, unsigned long bldr_log_
 	*bldr_log_buf_size = bldr_log_buf_ptr - bldr_log_buf;
 	printk(KERN_INFO "[K] bldr_log_parser: size %ld\n", *bldr_log_buf_size);
 }
-<<<<<<< HEAD
 #endif
-=======
->>>>>>> 39e6446... patch with internationalsourcedrop
 
 static int __init ram_console_late_init(void)
 {
@@ -887,32 +800,6 @@ static int __init ram_console_late_init(void)
 	}
 #endif
 
-#ifdef CONFIG_DEBUG_LAST_BLDR_LOG
-	if (last_bldr_log != NULL)
-	{
-		last_bldr_log_buf = kmalloc(last_bldr_log_size, GFP_KERNEL);
-		if (last_bldr_log_buf == NULL)
-			printk(KERN_ERR "[K] ram_console: failed to allocate buffer %ld for last bldr log\n", last_bldr_log_size);
-		else {
-			printk(KERN_INFO "[K] ram_console: allocate buffer %ld for last bldr log\n", last_bldr_log_size);
-			bldr_log_parser(last_bldr_log, last_bldr_log_buf, last_bldr_log_size, &last_bldr_log_buf_size);
-		}
-	}
-#endif
-
-#ifdef CONFIG_DEBUG_BLDR_LOG
-	if (bldr_log != NULL)
-	{
-		bldr_log_buf = kmalloc(bldr_log_size, GFP_KERNEL);
-		if (bldr_log_buf == NULL)
-			printk(KERN_ERR "[K] ram_console: failed to allocate buffer %ld for bldr log\n", bldr_log_size);
-		else {
-			printk(KERN_INFO "[K] ram_console: allocate buffer %ld for bldr log\n", bldr_log_size);
-			bldr_log_parser(bldr_log, bldr_log_buf, bldr_log_size, &bldr_log_buf_size);
-		}
-	}
-#endif
-
 	if (ram_console_old_log == NULL)
 		return 0;
 #ifdef CONFIG_ANDROID_RAM_CONSOLE_EARLY_INIT
@@ -937,17 +824,10 @@ static int __init ram_console_late_init(void)
 	entry->proc_fops = &ram_console_file_ops;
 	entry->size = ram_console_old_log_size;
 #ifdef CONFIG_DEBUG_LAST_BLDR_LOG
-<<<<<<< HEAD
 	entry->size += last_bldr_log_buf_size;
 #endif
 #ifdef CONFIG_DEBUG_BLDR_LOG
 	entry->size += bldr_log_buf_size;
-=======
-	entry->size += last_bldr_log_size;
-#endif
-#ifdef CONFIG_DEBUG_BLDR_LOG
-	entry->size += bldr_log_size;
->>>>>>> 39e6446... patch with internationalsourcedrop
 #endif
 	return 0;
 }
@@ -958,5 +838,4 @@ console_initcall(ram_console_early_init);
 postcore_initcall(ram_console_module_init);
 #endif
 late_initcall(ram_console_late_init);
-
 
