@@ -345,7 +345,7 @@ static int msm8960_i2s_hw_params(struct snd_pcm_substream *substream,
 	int bit_clk_set = 0;
 
 	if (substream->stream == SNDRV_PCM_STREAM_CAPTURE) {
-		bit_clk_set = 12288000/(rate * 2 * 16);
+		bit_clk_set = 18432000/(rate * 2 * 24);
 		pr_info("%s, bit clock is %d\n", __func__, bit_clk_set);
 		clk_set_rate(pri_i2s_rx_bit_clk, bit_clk_set);
 	}
@@ -1208,7 +1208,7 @@ static int msm_btsco_rate_put(struct snd_kcontrol *kcontrol,
 		msm_btsco_rate = BTSCO_RATE_16KHZ;
 		break;
 	default:
-		msm_btsco_rate = BTSCO_RATE_8KHZ;
+		msm_btsco_rate = BTSCO_RATE_16KHZ;
 		break;
 	}
 	pr_debug("%s: msm_btsco_rate = %d\n", __func__,
@@ -1695,7 +1695,7 @@ static int msm_be_hw_params_fixup(struct snd_soc_pcm_runtime *rtd,
 	param_set_mask(params, SNDRV_PCM_HW_PARAM_FORMAT,
 		SNDRV_PCM_FORMAT_S16_LE);
 
-	rate->min = rate->max = 48000;
+	rate->min = rate->max = 96000;
 
 	return 0;
 }
@@ -2637,3 +2637,4 @@ module_exit(msm_audio_exit);
 
 MODULE_DESCRIPTION("ALSA SoC msm");
 MODULE_LICENSE("GPL v2");
+
