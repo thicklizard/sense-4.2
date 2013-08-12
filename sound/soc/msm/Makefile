@@ -63,14 +63,13 @@ snd-soc-qdsp6-objs += msm-pcm-lpa.o msm-pcm-afe.o
 obj-$(CONFIG_SND_SOC_QDSP6) += snd-soc-qdsp6.o
 
 ifdef CONFIG_ARCH_APQ8064
-ifdef CONFIG_ARCH_APQ8064_M7wls
 snd-soc-msm8960-objs := apq8064_M7wls.o mpq8064.o
 else ifdef CONFIG_ARCH_DUMMY
 else
 snd-soc-msm8960-objs := apq8064.o mpq8064.o
 endif
 obj-$(CONFIG_SND_SOC_MSM8960) += snd-soc-msm8960.o
-else
+
 # Move board-specific msm8930.o to mach-msm
 #ifdef CONFIG_ARCH_MSM8930
 #snd-soc-msm8960-objs := msm8930.o
@@ -80,7 +79,7 @@ else
 #snd-soc-msm8960-objs := msm8960.o
 #obj-$(CONFIG_SND_SOC_MSM8960) += snd-soc-msm8960.o
 #endif
-endif
+
 
 # Generic MSM drivers
 snd-soc-hostless-pcm-objs := msm-pcm-hostless.o
