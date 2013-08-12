@@ -63,7 +63,7 @@ snd-soc-qdsp6-objs += msm-pcm-lpa.o msm-pcm-afe.o
 obj-$(CONFIG_SND_SOC_QDSP6) += snd-soc-qdsp6.o
 
 ifdef CONFIG_ARCH_APQ8064
-snd-soc-msm8960-objs := mpq8064.o apq8064.o
+snd-soc-msm8960-objs := apq8064_M7wls.o mpq8064.o
 else ifdef CONFIG_ARCH_DUMMY
 else
 snd-soc-msm8960-objs := apq8064.o mpq8064.o
