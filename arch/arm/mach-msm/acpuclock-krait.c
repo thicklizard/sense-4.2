@@ -885,46 +885,27 @@ static void __init bus_init(const struct l2_level *l2_level)
 		dev_err(drv.dev, "initial bandwidth req failed (%d)\n", ret);
 }
 
-
 #ifdef CONFIG_USERSPACE_VOLTAGE_CONTROL
 
 #define USERCONTROL_MIN_VDD		 750
 #define USERCONTROL_MAX_VDD		1300
 #define NUM_FREQS			14
 
-#ifdef CONFIG_CPU_VOLTAGE_TABLE
-
-#define HFPLL_MIN_VDD		 800000
-#define HFPLL_MAX_VDD		1350000
-
-
 ssize_t acpuclk_get_vdd_levels_str(char *buf) {
 
 	int i, len = 0;
 
 	if (buf) {
-<<<<<<< HEAD
 		for (i = 0; drv.acpu_freq_tbl[i].speed.khz; i++) {
 			if (drv.acpu_freq_tbl[i].use_for_scaling) {
 				len += sprintf(buf + len, "%lumhz: %i mV\n", drv.acpu_freq_tbl[i].speed.khz/1000,
 						drv.acpu_freq_tbl[i].vdd_core/1000 );
 			}
 		}
-=======
-		mutex_lock(&driver_lock);
-
-		for (i = 0; drv.acpu_freq_tbl[i].speed.khz; i++) {
-			len += sprintf(buf + len, "%8lu: %8d\n", drv.acpu_freq_tbl[i].speed.khz,
-				drv.acpu_freq_tbl[i].vdd_core );
-		}
-
-		mutex_unlock(&driver_lock);
->>>>>>> 8fb0ff6... add sysfs vdd
 	}
 	return len;
 }
 
-<<<<<<< HEAD
 ssize_t acpuclk_set_vdd(char *buf) {
 
         int i = 0;
@@ -953,29 +934,6 @@ ssize_t acpuclk_set_vdd(char *buf) {
 		}
 	}
 	return ret;
-=======
-void acpuclk_set_vdd(unsigned int khz, int vdd_uv) {
-
-	int i;
-	unsigned int new_vdd_uv;
-
-	mutex_lock(&driver_lock);
-
-	for (i = 0; drv.acpu_freq_tbl[i].speed.khz; i++) {
-		if (khz == 0)
-			new_vdd_uv = min(max((unsigned int)(drv.acpu_freq_tbl[i].vdd_core + vdd_uv),
-				(unsigned int)HFPLL_MIN_VDD), (unsigned int)HFPLL_MAX_VDD);
-		else if ( drv.acpu_freq_tbl[i].speed.khz == khz)
-			new_vdd_uv = min(max((unsigned int)vdd_uv,
-				(unsigned int)HFPLL_MIN_VDD), (unsigned int)HFPLL_MAX_VDD);
-		else 
-			continue;
-
-		drv.acpu_freq_tbl[i].vdd_core = new_vdd_uv;
-	}
-	pr_warn("user voltage table modified!\n");
-	mutex_unlock(&driver_lock);
->>>>>>> 8fb0ff6... add sysfs vdd
 }
 #endif
 
