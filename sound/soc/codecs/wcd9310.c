@@ -2911,8 +2911,8 @@ static int tabla_codec_enable_dec(struct snd_soc_dapm_widget *w,
 				  snd_soc_read(codec,
 				  tx_digital_gain_reg[w->shift + offset])
 				);
-				snd_soc_write(codec, rx_digital_gain_reg[0], 5);
-        			snd_soc_write(codec, rx_digital_gain_reg[1], 5); 
+				snd_soc_write(codec, tx_digital_gain_reg[0], 5);
+        			snd_soc_write(codec, tx_digital_gain_reg[1], 5); 
 		break;
 
 	case SND_SOC_DAPM_PRE_PMD:
