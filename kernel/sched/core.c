@@ -73,6 +73,8 @@
 #include <linux/init_task.h>
 #include <linux/binfmts.h>
 
+#include "../smpboot.h"
+
 #include <asm/switch_to.h>
 #include <asm/tlb.h>
 #include <asm/irq_regs.h>
@@ -5573,6 +5575,7 @@ void __init sched_init(void)
 	
 	if (cpu_isolated_map == NULL)
 		zalloc_cpumask_var(&cpu_isolated_map, GFP_NOWAIT);
+	idle_thread_set_boot_cpu(); 
 #endif
 	init_sched_fair_class();
 
